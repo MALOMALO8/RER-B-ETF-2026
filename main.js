@@ -374,7 +374,7 @@ window.deleteChantier = async function(id) {
   await deleteDoc(doc(db, 'chantiers', id))
 }
 
-// SÉCURITÉ AJOUTÉE : Ajout d'une vérification de conteneur
+// SÉCURITÉ AJOUTÉE
 window.addGpsPoint = function() {
   const container = document.getElementById('gps-points-container')
   if (!container) return
@@ -388,7 +388,6 @@ window.addGpsPoint = function() {
   `
   container.appendChild(row)
 }
-window.addGpsPoint()
 
 window.editChantier = async function(id) {
   const chantier = chantiers.find(c => c.id === id)
@@ -448,7 +447,7 @@ window.selectChantierFilter = function(chantierId) {
   render()
 }
 
-// SÉCURITÉ AJOUTÉE : Vérification de la carte
+// SÉCURITÉ AJOUTÉE
 function initMap() {
   const mapEl = document.getElementById('map')
   if (!mapEl || map) return
