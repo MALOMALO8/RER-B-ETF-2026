@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", () => {
 import './style.css'
 
 // Firebase SDK imports from CDN
@@ -527,7 +528,6 @@ function renderAdminDashboard() {
 
   return `
     <div class="min-h-screen bg-gray-900 text-white">
-      <!-- Header -->
       <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-20">
         <div class="max-w-full mx-auto px-4 py-3">
           <div class="flex flex-wrap items-center justify-between gap-3">
@@ -549,10 +549,8 @@ function renderAdminDashboard() {
         </div>
       </header>
 
-      <!-- Toolbar -->
       <div class="bg-gray-800/50 border-b border-gray-700 px-4 py-3">
         <div class="flex flex-wrap items-center gap-3">
-          <!-- Filter by fonction -->
           <div class="flex items-center gap-2">
             <label class="text-sm text-gray-400">Filtre:</label>
             <select onchange="setFilterFonction(this.value)" class="px-3 py-1.5 bg-gray-700 border border-gray-600 rounded text-sm">
@@ -561,7 +559,6 @@ function renderAdminDashboard() {
             </select>
           </div>
 
-          <!-- Selection info -->
           <div class="flex items-center gap-2">
             <button onclick="toggleSelectAll()" class="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 rounded text-sm">
               ${filtered.length > 0 && filtered.every(p => selectedPersonnelIds.has(p.id)) ? 'Tout désélectionner' : 'Tout sélectionner'}
@@ -569,12 +566,10 @@ function renderAdminDashboard() {
             <span class="text-sm text-gray-400">${selectedPersonnelIds.size} sélectionnés</span>
           </div>
 
-          <!-- Mass assign button -->
           <button onclick="openMassAssignModal()" class="px-4 py-1.5 bg-green-600 hover:bg-green-700 rounded-lg text-sm font-medium">
             Appliquer à la sélection
           </button>
 
-          <!-- Date navigation -->
           <div class="flex items-center gap-1 ml-auto">
             <button onclick="prevPeriod()" class="p-2 hover:bg-gray-700 rounded-lg">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
@@ -585,7 +580,6 @@ function renderAdminDashboard() {
             </button>
           </div>
 
-          <!-- View mode -->
           <div class="flex items-center gap-1 bg-gray-700 rounded-lg p-1">
             <button onclick="setViewMode('day')" class="px-3 py-1 rounded ${viewMode === 'day' ? 'bg-blue-600' : 'hover:bg-gray-600'} text-sm">Jour</button>
             <button onclick="setViewMode('week')" class="px-3 py-1 rounded ${viewMode === 'week' ? 'bg-blue-600' : 'hover:bg-gray-600'} text-sm">Semaine</button>
@@ -594,7 +588,6 @@ function renderAdminDashboard() {
         </div>
       </div>
 
-      <!-- Planning Grid -->
       <div class="overflow-x-auto">
         <table class="w-full min-w-[800px]">
           <thead class="bg-gray-800 sticky top-[108px] z-10">
@@ -655,7 +648,6 @@ function renderAdminDashboard() {
         </table>
       </div>
 
-      <!-- Mass Assign Modal -->
       <div id="mass-assign-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
         <div class="bg-gray-800 rounded-xl p-6 w-full max-w-md border border-gray-700">
           <h3 class="text-lg font-bold mb-4">Affectation massive</h3>
@@ -707,7 +699,6 @@ function renderPersonnelManagement() {
       </header>
 
       <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
-        <!-- Add Form -->
         <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
           <h2 class="text-lg font-semibold mb-4">Ajouter un collaborateur</h2>
           <form onsubmit="savePersonnel(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -736,7 +727,6 @@ function renderPersonnelManagement() {
           </form>
         </div>
 
-        <!-- List -->
         <div class="bg-gray-800 rounded-xl border border-gray-700 divide-y divide-gray-700">
           <div class="px-4 py-3 text-sm text-gray-400">Liste (${personnel.length})</div>
           ${personnel.length === 0 ? `<div class="p-6 text-center text-gray-500">Aucun personnel</div>` : personnel.map(p => `
@@ -774,7 +764,6 @@ function renderChantiersManagement() {
       </header>
 
       <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
-        <!-- Add Form -->
         <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
           <h2 class="text-lg font-semibold mb-4">Ajouter un chantier</h2>
           <form onsubmit="saveChantier(event)" class="space-y-4">
@@ -805,7 +794,6 @@ function renderChantiersManagement() {
               </div>
             </div>
 
-            <!-- GPS Points -->
             <div>
               <label class="block text-sm text-gray-400 mb-2">Points GPS / Adresses</label>
               <div id="gps-points-container" class="space-y-2"></div>
@@ -821,7 +809,6 @@ function renderChantiersManagement() {
           </form>
         </div>
 
-        <!-- List -->
         <div class="bg-gray-800 rounded-xl border border-gray-700 divide-y divide-gray-700">
           <div class="px-4 py-3 text-sm text-gray-400">Liste (${chantiers.length})</div>
           ${chantiers.length === 0 ? `<div class="p-6 text-center text-gray-500">Aucun chantier</div>` : chantiers.map(c => `
@@ -884,7 +871,6 @@ function renderVisitorView() {
         </div>
       </header>
 
-      <!-- Toolbar -->
       <div class="bg-gray-800/50 border-b border-gray-700 px-4 py-3">
         <div class="flex flex-wrap items-center gap-3">
           <input type="text" id="personnel-name-filter" placeholder="Rechercher votre nom..." value="${selectedPersonnelFilter}"
@@ -906,9 +892,8 @@ function renderVisitorView() {
             <button onclick="setViewMode('2weeks')" class="px-3 py-1 rounded ${viewMode === '2weeks' ? 'bg-blue-600' : 'hover:bg-gray-600'} text-sm">2 sem.</button>
           </div>
         </div>
-      </header>
+      </div>
 
-      <!-- Planning -->
       <div class="overflow-x-auto p-4">
         ${!selectedPersonnelFilter && !selectedChantierFilter ? `
           <div class="bg-gray-800 rounded-xl p-8 text-center text-gray-400">
@@ -989,7 +974,6 @@ function renderMapView() {
 
       <div id="map" class="w-full h-[calc(100vh-64px)] bg-gray-800"></div>
 
-      <!-- Chantier Sidebar -->
       <div class="absolute bottom-4 left-4 right-4 sm:left-4 sm:right-auto sm:w-80 bg-gray-800/95 backdrop-blur rounded-xl p-4 border border-gray-700 max-h-[40vh] overflow-y-auto">
         <h3 class="font-semibold mb-3">Chantiers (${chantiers.length})</h3>
         <div class="space-y-2">
@@ -1012,13 +996,8 @@ function renderMapView() {
 }
 
 function renderTeamView() {
-  // Get today's shift and chantier for selected personnel
   const today = new Date().toISOString().split('T')[0]
-
-  // Find who's working today
   const todayAffectations = affectations.filter(a => a.date === today && a.shift !== 'Repos')
-
-  // Group by chantier
   const byChantier = {}
   todayAffectations.forEach(aff => {
     const chantierId = aff.id_chantier || 'none'
@@ -1227,3 +1206,4 @@ function subscribeToData() {
 // Start
 render()
 subscribeToData()
+});
