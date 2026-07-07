@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
 import './style.css'
 
 // Firebase SDK imports from CDN
@@ -375,8 +374,10 @@ window.deleteChantier = async function(id) {
   await deleteDoc(doc(db, 'chantiers', id))
 }
 
+// SÉCURITÉ AJOUTÉE : Ajout d'une vérification de conteneur
 window.addGpsPoint = function() {
   const container = document.getElementById('gps-points-container')
+  if (!container) return
   const row = document.createElement('div')
   row.className = 'gps-point grid grid-cols-12 gap-2 items-center'
   row.innerHTML = `
@@ -447,7 +448,7 @@ window.selectChantierFilter = function(chantierId) {
   render()
 }
 
-// Initialize Map
+// SÉCURITÉ AJOUTÉE : Vérification de la carte
 function initMap() {
   const mapEl = document.getElementById('map')
   if (!mapEl || map) return
@@ -1206,4 +1207,3 @@ function subscribeToData() {
 // Start
 render()
 subscribeToData()
-});
