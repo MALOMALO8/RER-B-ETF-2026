@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/* Dark mode base */
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-gray-900 text-white;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Custom marker for Leaflet */
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Smooth transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Input focus states */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+/* Button animations */
+button:active {
+  transform: scale(0.97);
+}
+
+/* Table sticky headers */
+table thead th.sticky {
+  position: sticky;
+  top: 0;
+}
+
+/* Leaflet customization for dark mode */
+.leaflet-popup-content-wrapper {
+  background: #1f2937 !important;
+  color: white !important;
+  border-radius: 12px !important;
+}
+
+.leaflet-popup-tip {
+  background: #1f2937 !important;
+}
+
+.leaflet-container {
+  background: #111827 !important;
+}
+
+/* Loading animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
